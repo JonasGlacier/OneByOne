@@ -14,6 +14,7 @@ import type { AgentResult, AiProposal } from "./ai";
 import { TextHistory, WorkspaceHistory } from "./history";
 import type { TextState } from "./history";
 import "./styles.css";
+import { bindMusic, initializeMusic, musicTemplate } from "./music";
 
 const app = document.querySelector<HTMLElement>("#app")!;
 const browserKey = "onebyone-board";
@@ -237,6 +238,7 @@ function render() {
     <header class="titlebar">
       ${isMobile() ? `<span class="mobile-brand">OneByOne</span>` : `<div class="window-drag-region" data-window-drag title="${t("dragWindow")}" aria-label="${t("dragWindow")}"><span></span></div>`}
       <div class="window-actions">
+        ${isTauri() && !isMobile() ? musicTemplate() : ""}
         <button class="icon-button" id="undo-button" title="${t("undoShortcut")}" aria-label="${t("undo")}">${icon("undo")}</button>
         <button class="icon-button" id="settings-button" title="${t("settings")}" aria-label="${t("settings")}">${icon("settings")}</button>
         ${!isMobile() ? `<button class="icon-button ${pinned ? "is-active" : ""}" id="pin-button" title="${t(pinned ? "unpin" : "pin")}" aria-label="${t(pinned ? "unpin" : "pin")}" aria-pressed="${pinned}">${icon(pinned ? "pin" : "pinOff")}</button><button class="icon-button" id="hide-button" title="${t("hide")}" aria-label="${t("hide")}">${icon("hide")}</button>` : ""}
@@ -774,6 +776,7 @@ document.addEventListener("pointerdown", (event) => {
 });
 
 function bindEvents() {
+  bindMusic();
   document.querySelector("#ai-button")?.addEventListener("click", toggleAi);
   document.querySelector<HTMLTextAreaElement>("#ai-prompt")?.addEventListener("input", (event) => { aiPrompt = (event.target as HTMLTextAreaElement).value; });
   document.querySelector("#ai-panel")?.addEventListener("submit", (event) => { event.preventDefault(); void runAi(); });
@@ -1021,6 +1024,8 @@ async function start() {
     if (!isMobile()) {
       const stopHideListener = await listen("tray-hide-requested", () => { void suspendToTray(); });
       window.addEventListener("pagehide", stopHideListener, { once: true });
+      const stopMusic = await initializeMusic();
+      window.addEventListener("pagehide", stopMusic, { once: true });
     }
   }
   if (isTauri()) await unlockIfNeeded();

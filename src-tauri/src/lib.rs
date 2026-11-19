@@ -17,6 +17,7 @@ mod causal;
 pub mod sync_lan;
 pub mod sync_merge;
 mod vault;
+mod music;
 
 #[cfg(not(any(target_os = "android", target_os = "ios")))]
 pub mod cli;
@@ -792,6 +793,8 @@ fn tray_menu<R: Runtime>(app: &AppHandle<R>, language: &str) -> Result<tauri::me
     tauri::menu::MenuBuilder::new(app)
         .text("show", if english { "Show OneByOne" } else { "显示 OneByOne" })
         .separator()
+        .text("music-toggle", if english { "Play / stop lo-fi" } else { "播放 / 停止 lo-fi" })
+        .separator()
         .text("quit", if english { "Quit" } else { "退出" })
         .build()
         .map_err(|error| error.to_string())
@@ -845,6 +848,7 @@ pub fn run() {
             #[cfg(not(any(target_os = "android", target_os = "ios")))]
             {
                 cli::start(app.handle().clone())?;
+                music::start(app.handle())?;
                 let menu = tray_menu(app.handle(), "zh-CN").map_err(std::io::Error::other)?;
                 let tray_icon = tauri::image::Image::from_app_icon_resource(32)?;
                 tauri::tray::TrayIconBuilder::with_id("main-tray")
@@ -854,6 +858,7 @@ pub fn run() {
                     .on_menu_event(|app, event| match event.id().as_ref() {
                         "show" => show_main(app),
                         "quit" => app.exit(0),
+                        "music-toggle" => music::tray_control(app, "toggle"),
                         _ => {}
                     })
                     .on_tray_icon_event(|tray, event| {
@@ -909,6 +914,7 @@ pub fn run() {
     let app = builder
         .invoke_handler(tauri::generate_handler![
             get_platform,
+            music::music_control,
             load_board,
             save_board,
             load_session,

@@ -2,7 +2,7 @@ import {
   Archive, ArchiveRestore, ArrowLeft, ArrowUp, Check, ChevronRight, CornerDownRight, GripVertical, Languages,
   ListFilter, ListIndentDecrease, ListIndentIncrease, ListPlus, ListTodo, Minus, MonitorSmartphone,
   Palette, Pin, PinOff, Plus, RefreshCw, RotateCcw, Settings, ShieldCheck, SlidersHorizontal,
-  Sparkles, Trash2, X, createElement,
+  Sparkles, Trash2, X, Music2, Play, Square, createElement,
 } from "lucide";
 
 const icons = {
@@ -12,6 +12,7 @@ const icons = {
   general: SlidersHorizontal, language: Languages, privacy: ShieldCheck, palette: Palette,
   ai: Sparkles, send: ArrowUp, undo: RotateCcw, sync: RefreshCw, devices: MonitorSmartphone,
   indent: ListIndentIncrease, outdent: ListIndentDecrease, sibling: CornerDownRight,
+  music: Music2, play: Play, stop: Square,
 };
 const cache = new Map<keyof typeof icons, string>();
 

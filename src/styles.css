@@ -37,6 +37,19 @@ input::placeholder, textarea::placeholder { color: var(--text-3); }
 .window-drag-region:hover span { background: #bdbdbd; }
 .window-drag-region:active { cursor: grabbing; }
 .window-actions { display: flex; flex-shrink: 0; gap: 3px; }
+.music-player { position: relative; }
+.music-panel { position: absolute; z-index: 20; top: 30px; right: -84px; width: min(242px, calc(100vw - 24px)); padding: 13px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); box-shadow: 0 6px 20px rgba(0, 0, 0, .1); font-size: 12px; }
+.music-panel[hidden] { display: none; }
+.music-panel strong { font-size: 11px; }
+.music-track { margin-top: 12px; font-weight: 600; overflow-wrap: anywhere; }
+.music-artist { margin-top: 3px; color: var(--text-2); font-size: 11px; }
+.music-controls { display: flex; gap: 10px; margin: 12px 0; }
+.music-controls .icon-button { width: 30px; height: 30px; color: var(--ink); background: var(--field); }
+.music-controls .icon-button:disabled { opacity: .4; }
+.music-volume { display: flex; align-items: center; gap: 10px; color: var(--text-2); font-size: 11px; }
+.music-volume input { flex: 1; min-width: 0; accent-color: var(--ink); }
+.music-hint { margin: 12px 0 0; color: var(--text-3); font-size: 10px; line-height: 1.6; }
+.music-error { margin: 8px 0 0; color: var(--danger); font-size: 11px; overflow-wrap: anywhere; }
 #undo-button { display: none; }
 [data-platform="android"] #undo-button, [data-platform="ios"] #undo-button { display: grid; }
 .icon-button { display: grid; width: 25px; height: 25px; place-items: center; border-radius: 6px; color: var(--text-3); }

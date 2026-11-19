@@ -8,6 +8,7 @@ export type Settings = { language: Language; uiScale: UiScale };
 export const isUiScale = (value: unknown): value is UiScale => UI_SCALES.includes(value as UiScale);
 
 const zh = {
+  music: "Lo-fi 音乐", musicPlay: "播放", musicStop: "停止", musicVolume: "音量", musicHint: "内置音乐 · 顺序循环 · 隐藏后继续播放", musicFailed: "音乐播放失败：{error}", musicLoading: "正在读取播放器…",
   aiMobileOpen: "用 AI 创建或修改待办", aiCollapse: "收起 AI 输入框",
   aiKeySaved: "API Key 已保存。", aiKeyNotSaved: "尚未保存 API Key。", aiKeyUnknown: "无法确认 API Key 的保存状态。", aiKeyReplacePlaceholder: "输入新密钥以替换已保存的密钥",
   undoShortcut: "撤销（Ctrl+Z）", undoAvailable: "撤销最近一次操作，还可撤销 {count} 次", undoDone: "已撤销上一次操作", nothingToUndo: "没有可撤销的操作", undoFailed: "撤销失败：{error}",
@@ -47,6 +48,7 @@ const zh = {
 };
 
 const en: Record<keyof typeof zh, string> = {
+  music: "Lo-fi music", musicPlay: "Play", musicStop: "Stop", musicVolume: "Volume", musicHint: "Built-in tracks · Loop playlist · Plays in tray", musicFailed: "Music playback failed: {error}", musicLoading: "Loading player…",
   aiMobileOpen: "Create or edit tasks with AI", aiCollapse: "Collapse AI input",
   aiKeySaved: "API key saved.", aiKeyNotSaved: "No API key saved.", aiKeyUnknown: "Unable to determine whether an API key is saved.", aiKeyReplacePlaceholder: "Enter a new key to replace the saved key",
   undoShortcut: "Undo (Ctrl+Z)", undoAvailable: "Undo the last operation; {count} undo steps available", undoDone: "Last operation undone", nothingToUndo: "Nothing to undo", undoFailed: "Couldn't undo: {error}",

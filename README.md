@@ -21,6 +21,7 @@ A lightweight todo app with nested subtasks for **Windows 10/11** and **Android*
   - **Android 16+ App Functions API**: Exposes `OneByOneAppFunctionService` directly to system Gemini Agent to list, create, break down, and undo nested todo lists.
   - **Desktop CLI**: External Agents can use `onebyone-cli.exe` to read lists, submit changes, and undo. See [AI, App Functions & CLI](docs/ai-and-cli.md).
 - **Local Vault Encryption**: Protect data at rest with Argon2id + AES-256-GCM.
+- **Desktop Lo-fi Music**: Five bundled offline tracks, a single play/stop toggle, and saved volume. Open the music-note button in the title bar or use the tray menu. The playlist loops in order and keeps playing when the WebView is destroyed in tray mode. Stopping releases the audio output; playing again starts the current track from the beginning. Startup never auto-plays. Sources are listed in [music resources](src-tauri/resources/music/README.md).
 
 ## Privacy and Storage
 
@@ -67,3 +68,4 @@ cd src-tauri/gen/android && ./gradlew assembleArm64Debug
   - **Android 16+ App Functions API**：原生实现 `OneByOneAppFunctionService`，向系统级 Gemini Agent 暴露清单读取、创建、子任务拆解与撤销能力。
   - **桌面端 Agent CLI**：随安装包附带 `onebyone-cli.exe`，供 OpenCode、Claude Code 等终端 Agent 直接调用。详见 [AI、Android 系统 Agent 与桌面 CLI 说明](docs/ai-and-cli.md)。
 - **本地保险库加密**：支持基于 Argon2id + AES-256-GCM 的独立密码本地加密。
+- **桌面端 Lo-fi 音乐**：内置 5 首离线音乐，提供单一播放／停止切换按钮与音量记忆；通过标题栏音符按钮或托盘菜单控制。曲目顺序循环，隐藏并销毁网页窗口后继续播放；停止会释放音频输出，再次播放从当前曲目开头开始，启动时不自动播放。音源信息见[音乐资源目录](src-tauri/resources/music/README.md)。
